@@ -46,5 +46,15 @@ namespace CharacterCopy.Tests
 
             destination.DidNotReceive().WriteChar(Arg.Any<char>());
         }
+
+        [Test]
+        public void Given_TenCharacters_When_CopyNthIsCalled_Then_ShouldCallWriteChars()
+        {
+            source.ReadChars(2).Returns(b => new[] { 'a', 'b' }, b => new[] { 'c', 'd' }, b => new[] { 'e', '\n' });
+
+            service.Copy(2);
+
+            destination.Received(2).WriteChars(Arg.Any<char[]>());
+        }
     }
 }

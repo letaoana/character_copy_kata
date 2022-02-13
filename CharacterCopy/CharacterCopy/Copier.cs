@@ -1,4 +1,6 @@
-﻿namespace CharacterCopy
+﻿using System;
+
+namespace CharacterCopy
 {
     public class Copier
     {
@@ -21,6 +23,19 @@
                     read = false;
                 else
                     dest.WriteChar(character);
+            }
+        }
+
+        public void Copy(int count)
+        {
+            bool read = true;
+            while (read)
+            {
+                var characters = src.ReadChars(count);
+                if (!Array.IndexOf(characters, '\n').Equals(-1))
+                    read = false;
+                else
+                    dest.WriteChars(characters);
             }
         }
     }
