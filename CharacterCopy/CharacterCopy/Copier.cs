@@ -31,6 +31,8 @@ namespace CharacterCopy
             bool read = true;
             while (read)
             {
+                if (count <= 0)
+                    break;
                 var characters = src.ReadChars(count);
                 if (!Array.IndexOf(characters, '\n').Equals(-1))
                     read = false;

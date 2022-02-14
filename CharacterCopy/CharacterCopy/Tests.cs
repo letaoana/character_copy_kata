@@ -50,7 +50,7 @@ namespace CharacterCopy.Tests
         [Test]
         public void Given_TenCharacters_When_CopyNthIsCalled_Then_ShouldCallWriteChars()
         {
-            source.ReadChars(2).Returns(b => new[] { 'a', 'b' }, b => new[] { 'c', 'd' }, b => new[] { 'e', '\n' });
+            source.ReadChars(2).Returns(b => new[] { 'a', 'b' }, b => new[] { 'c', 'd' }, b => new[] { 'e', '\n' }, b => new[] { 'f', 'g' });
 
             service.Copy(2);
 
