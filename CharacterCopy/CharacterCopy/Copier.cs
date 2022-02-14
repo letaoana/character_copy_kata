@@ -19,7 +19,7 @@ namespace CharacterCopy
             while (read)
             {
                 char character = src.ReadChar();
-                if (character.Equals('\n'))
+                if (character == '\n')
                     read = false;
                 else
                     dest.WriteChar(character);
@@ -28,16 +28,28 @@ namespace CharacterCopy
 
         public void Copy(int count)
         {
-            bool read = true;
-            while (read)
+            if (!(count <= 0))
             {
-                if (count <= 0)
-                    break;
-                var characters = src.ReadChars(count);
-                if (!Array.IndexOf(characters, '\n').Equals(-1))
-                    read = false;
-                else
-                    dest.WriteChars(characters);
+                bool read = true;
+                while (read)
+                {
+                    var characters = src.ReadChars(count);
+                    var indexOfNewLine = Array.IndexOf(characters, '\n');
+                    if (indexOfNewLine.Equals(0)) break;
+                  
+                    var numOfCharsToCopy = !indexOfNewLine.Equals(-1) ? indexOfNewLine : count;
+                    var charsToCopy = new char[numOfCharsToCopy];
+                    for (int i = 0; i < characters.Length; i++)
+                    {
+                        if (i.Equals(indexOfNewLine))
+                        {
+                            read = false;
+                            break;
+                        }
+                        charsToCopy[i] = characters[i];
+                    }
+                    dest.WriteChars(charsToCopy);
+                }
             }
         }
     }
